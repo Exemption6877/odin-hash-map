@@ -105,10 +105,21 @@ class HashMap {
     });
     return valuesArray;
   }
+
+  entries() {
+    const returnArray = [];
+    this.buckets.forEach((bucket) => {
+      bucket.forEach((element) => {
+        returnArray.push([element[0], element[1]]);
+      });
+    });
+
+    return returnArray;
+  }
 }
 
 const testMap = new HashMap(0.8, 16);
 testMap.set("banana", "yellow");
 testMap.set("apple", "red");
 testMap.set("road", "black");
-console.log(testMap.values());
+console.log(testMap.entries());

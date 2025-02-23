@@ -89,11 +89,26 @@ class HashMap {
     }
     this.buckets = [];
   }
+
+  keys() {
+    const keyArray = [];
+    this.buckets.forEach((element) => {
+      keyArray.push(element[0]);
+    });
+    return keyArray;
+  }
+
+  values() {
+    const valuesArray = [];
+    this.buckets.forEach((element) => {
+      valuesArray.push(element[0][1]);
+    });
+    return valuesArray;
+  }
 }
 
 const testMap = new HashMap(0.8, 16);
 testMap.set("banana", "yellow");
 testMap.set("apple", "red");
 testMap.set("road", "black");
-console.log(testMap.length());
-testMap.logBuckets();
+console.log(testMap.values());

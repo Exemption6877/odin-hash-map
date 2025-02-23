@@ -1,5 +1,5 @@
 class HashMap {
-  constructor(load_factor, capacity) {
+  constructor(load_factor = 0.8, capacity = 16) {
     this.load_factor = load_factor;
     this.capacity = capacity;
     this.buckets = new Array(capacity);
@@ -9,13 +9,35 @@ class HashMap {
     console.log(this.buckets);
   }
 
-  hash(key) {
+  resize() {
+    const newCapacity = this.capacity * 2;
+    const newBuckets = new Array(newCapacity);
+
+    for (let i = 0; i < this.buckets.length; i++) {
+      if (this.buckets[i]) {
+        for (let j = 0; j < this.buckets[i].length; j++) {
+          const key = this.buckets[i][j][0];
+          const value = this.buckets[i][j][1];
+          const index = this.hash(key, newCapacity);
+          if (!newBuckets[index]) {
+            newBuckets[index] = [];
+          }
+          newBuckets[index].push([key, value]);
+        }
+      }
+    }
+
+    this.buckets = newBuckets;
+    this.capacity = newCapacity;
+  }
+
+  hash(key, capacity = this.capacity) {
     let hashCode = 0;
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
     }
-    return Math.abs(hashCode) % this.capacity;
+    return Math.abs(hashCode) % capacity;
   }
 
   set(key, value) {
@@ -33,6 +55,10 @@ class HashMap {
         }
       }
       this.buckets[index].push([key, value]);
+    }
+
+    if (this.length() > this.capacity * this.load_factor) {
+      this.resize;
     }
   }
 
@@ -118,7 +144,7 @@ class HashMap {
   }
 }
 
-const testMap = new HashMap(0.8, 16);
+const testMap = new HashMap();
 testMap.set("banana", "yellow");
 testMap.set("apple", "red");
 testMap.set("road", "black");

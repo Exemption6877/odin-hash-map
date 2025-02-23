@@ -35,7 +35,20 @@ class HashMap {
       this.buckets[index].push([key, value]);
     }
   }
+
+  get(key) {
+    const index = this.hash(key);
+    for (let i = 0; i < this.buckets[index].length; i++) {
+      if (this.buckets[index][i][0] === key) {
+        return this.buckets[index][i][1];
+      }
+    }
+
+    return null;
+  }
 }
 
 const testMap = new HashMap();
-testMap.logBuckets();
+testMap.set("banana", "yellow");
+testMap.set("apple", "red");
+console.log(testMap.get("banana"));

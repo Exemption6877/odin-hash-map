@@ -1,5 +1,5 @@
 class HashMap {
-  constructor(load_factor = 0.75, capacity = 16) {
+  constructor(load_factor = 0.4, capacity = 16) {
     this.load_factor = load_factor;
     this.capacity = capacity;
     this.buckets = new Array(capacity);
@@ -58,7 +58,7 @@ class HashMap {
     }
 
     if (this.length() > this.capacity * this.load_factor) {
-      this.resize;
+      this.resize();
     }
   }
 

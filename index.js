@@ -82,6 +82,13 @@ class HashMap {
     }
     return counter;
   }
+
+  clear() {
+    for (let i = 0; i < this.buckets.length; i++) {
+      this.buckets[i] = [];
+    }
+    this.buckets = [];
+  }
 }
 
 const testMap = new HashMap(0.8, 16);

@@ -13,9 +13,9 @@ class HashMap {
     let hashCode = 0;
     const primeNumber = 31;
     for (let i = 0; i < key.length; i++) {
-      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
+      hashCode = primeNumber * hashCode + key.charCodeAt(i);
     }
-    return hashCode;
+    return Math.abs(hashCode) % this.capacity;
   }
 
   set(key, value) {
@@ -70,10 +70,23 @@ class HashMap {
     return false;
   }
 
-  
+  length() {
+    const buckets = this.buckets;
+    let counter = 0;
+    for (let i = 0; i < buckets.length; i++) {
+      if (buckets[i]) {
+        buckets[i].forEach((element) => {
+          counter += 1;
+        });
+      }
+    }
+    return counter;
+  }
 }
 
-const testMap = new HashMap();
+const testMap = new HashMap(0.8, 16);
 testMap.set("banana", "yellow");
 testMap.set("apple", "red");
-console.log(testMap.get("banana"));
+testMap.set("road", "black");
+console.log(testMap.length());
+testMap.logBuckets();

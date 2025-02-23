@@ -46,6 +46,17 @@ class HashMap {
 
     return null;
   }
+
+  has(key) {
+    const index = this.hash(key);
+    for (let i = 0; i < this.buckets[index].length; i++) {
+      if (this.buckets[index][i][0] === key) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 }
 
 const testMap = new HashMap();

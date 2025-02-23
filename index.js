@@ -1,5 +1,5 @@
 class HashMap {
-  constructor(load_factor = 0.8, capacity = 16) {
+  constructor(load_factor = 0.75, capacity = 16) {
     this.load_factor = load_factor;
     this.capacity = capacity;
     this.buckets = new Array(capacity);
@@ -144,8 +144,10 @@ class HashMap {
   }
 }
 
-const testMap = new HashMap();
-testMap.set("banana", "yellow");
-testMap.set("apple", "red");
-testMap.set("road", "black");
-console.log(testMap.entries());
+// const testMap = new HashMap();
+// testMap.set("banana", "yellow");
+// testMap.set("apple", "red");
+// testMap.set("road", "black");
+// console.log(testMap.entries());
+
+export default HashMap;

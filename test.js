@@ -16,4 +16,5 @@ test.set("lion", "golden");
 test.set("123", "456");
 
 // console.log(test.keys());
-test.logBuckets();
+// test.logBuckets();
+console.log(test);
